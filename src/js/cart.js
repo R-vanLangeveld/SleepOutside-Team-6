@@ -1,18 +1,20 @@
 import { getLocalStorage } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart");
-  const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-  document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  const cartItems = getLocalStorage("so-cart") || "no items";
+  if (cartItems === "no items") {
+    document.querySelector(".product-list").innerHTML =
+      "There are no items in the cart.";
+  } else {
+    const htmlItems = cartItems.map((item) => cartItemTemplate(item));
+    document.querySelector(".product-list").innerHTML = htmlItems.join("");
+  }
 }
 
 function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
-    <img
-      src="${item.Image}"
-      alt="${item.Name}"
-    />
+    <img src="${item.Image}" alt="${item.Name}">
   </a>
   <a href="#">
     <h2 class="card__name">${item.Name}</h2>
