@@ -203,6 +203,30 @@ button {
   width: 100%;
 }
 
+.product-card__retail-price span:first-child,
+.product-card__discount span:first-child,
+.product-card__price span:first-child {
+  font-weight: 600;
+}
+
+.product-card__discount span:last-child {
+  color: white;
+  background-color: #525b0f;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.product-card__retail-price span:last-child {
+  text-decoration: line-through;
+}
+
+.product-card__discount span:last-child {
+  color: white;
+  background-color: #525b0f;
+  padding: 10px;
+  border-radius: 10px;
+}
+
 /* Start cart list card styles */
 .cart-card {
   display: grid;
