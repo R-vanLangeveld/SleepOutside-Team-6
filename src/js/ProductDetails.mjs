@@ -1,4 +1,4 @@
-import { getLocalStorage, setLocalStorage } from "./utils.mjs";
+import { getLocalStorage, setLocalStorage, getDiscount } from "./utils.mjs";
 
 
 export default class ProductDetails {
@@ -36,6 +36,7 @@ export default class ProductDetails {
  * @param {string} product.Brand.Name - The name of the product's brand.
  * @param {string} product.NameWithoutBrand - The product name without the brand.
  * @param {string} product.Image - The URL of the product image.
+ * @param {string} product.SuggestedRetailPrice - The suggested retail price of the product.
  * @param {string} product.FinalPrice - The final price of the product.
  * @param {Array<Object>} product.Colors - Array of color objects for the product.
  * @param {string} product.Colors[].ColorName - The name of the color.
@@ -50,10 +51,12 @@ function productDetailsHTML(product) {
     productImage.src = product.Image;
     productImage.alt = product.NameWithoutBrand
 
-    document.getElementById("price").textContent = product.FinalPrice
-    document.getElementById("color").textContent = product.Colors[0].ColorName
-    document.getElementById("description").innerHTML = product.DescriptionHtmlSimple
+    document.getElementById("retail-price").innerHTML = `<span>Retail Price:</span> <span>$${product.SuggestedRetailPrice}</span>`;
+    document.getElementById("discount").innerHTML = `<span>You save:</span> <span>${getDiscount(product.SuggestedRetailPrice, product.FinalPrice)}%</span>`;
+    document.getElementById("price").innerHTML =`<span>Now:</span> $${product.FinalPrice}`;
+    document.getElementById("color").innerHTML = product.Colors[0].ColorName;
+    document.getElementById("description").innerHTML = product.DescriptionHtmlSimple;
 
-    document.getElementById("addToCart").dataset.id = product.Id
+    document.getElementById("addToCart").dataset.id = product.Id;
 
 }
