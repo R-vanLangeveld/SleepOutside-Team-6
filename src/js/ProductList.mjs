@@ -1,9 +1,15 @@
-function convertToJson(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error("Bad Response");
-  }
+import { renderListWithTemplate } from "./utils.mjs"
+
+function productCardTemplate(product) {
+  return `<li class="product-card">
+          <a href="product_pages/?product=${product.Id}">
+            <img src="${product.Image}"
+              alt="${product.Name}" />
+            <h3 class="card__brand">${product.Brand.Name}</h3>
+            <h2 class="card__name">${product.NameWithoutBrand}</h2>
+            <p class="product-card__price">$${product.ListPrice}</p>
+          </a>
+        </li>`
 }
 
 export default class ProductList {
@@ -14,14 +20,16 @@ export default class ProductList {
   }
 
   async init() {
+
     const list = await this.dataSource.getData();
-    this.renderProductList(list)
-    document
-      .getElementById("addToCart")
-      .addEventListener("click", this.addProductToCart.bind(this));
-  }
+    this.renderList(list)
 
-  renderProductList(list) {
 
   }
+
+  renderList(list) {
+    renderListWithTemplate(productCardTemplate, this.listElement, list)
+  }
+
+
 }

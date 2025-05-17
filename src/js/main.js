@@ -3,6 +3,9 @@ import ProductList from "./ProductList.mjs"
 
 const dataSource = new ProductData("tents");
 
-const list = new ProductList("tents", dataSource);
+const element = document.querySelector(".product-list");
 
-console.log(list)
+const list = new ProductList("tents", dataSource, element);
+
+list.init()
+
