@@ -15,7 +15,7 @@ function productCardTemplate(product) {
       ${discount}
       <p class="product-card__price">$${product.FinalPrice}</p>
     </a>
-  </li>;`
+  </li>`;
 }
 
 export default class ProductList {
