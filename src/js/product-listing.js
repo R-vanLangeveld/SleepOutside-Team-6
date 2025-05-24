@@ -10,4 +10,4 @@ const element = document.querySelector(".product-list");
 const productList = new ProductList(category, dataSource, element);
 productList.init();
 
-document.querySelector("h2").innerText = `Top Products: ${category}`;
+document.querySelector("h2").innerText = `Top Products: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
