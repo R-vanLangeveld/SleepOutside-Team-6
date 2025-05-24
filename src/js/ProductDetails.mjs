@@ -35,7 +35,7 @@ export default class ProductDetails {
  * @param {Object} product.Brand - The brand information of the product.
  * @param {string} product.Brand.Name - The name of the product's brand.
  * @param {string} product.NameWithoutBrand - The product name without the brand.
- * @param {string} product.Image - The URL of the product image.
+ * @param {string} product.Images.PrimaryLarge - The URL of the product image.
  * @param {string} product.SuggestedRetailPrice - The suggested retail price of the product.
  * @param {string} product.FinalPrice - The final price of the product.
  * @param {Array<Object>} product.Colors - Array of color objects for the product.
@@ -48,7 +48,7 @@ function productDetailsHTML(product) {
     document.querySelector("h2").textContent = product.NameWithoutBrand;
 
     const productImage = document.getElementById("productImage");
-    productImage.src = product.Image;
+    productImage.src = product.Images.PrimaryLarge;
     productImage.alt = product.NameWithoutBrand
 
     document.getElementById("retail-price").innerHTML = `<span>Retail Price:</span> <span>$${product.SuggestedRetailPrice}</span>`;
