@@ -271,21 +271,19 @@ button {
   grid-column: 3;
 }
 
-.cart-footer{
+.cart-footer {
   margin: 10px;
   display: flex;
   justify-content: flex-end;
 }
 
-.cart-total{
-    text-decoration: underline;
+.cart-total {
+  text-decoration: underline;
 }
 
-.hide{
+.hide {
   display: none;
 }
-
-
 
 /* categories */
 .categories {
