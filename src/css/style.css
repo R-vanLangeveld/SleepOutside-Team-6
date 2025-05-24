@@ -271,6 +271,22 @@ button {
   grid-column: 3;
 }
 
+.cart-footer{
+  margin: 10px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cart-total{
+    text-decoration: underline;
+}
+
+.hide{
+  display: none;
+}
+
+
+
 /* categories */
 .categories {
   margin: 2rem 0.75rem;
