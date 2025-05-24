@@ -1,16 +1,20 @@
-import { getLocalStorage, setLocalStorage, getDiscount } from "./utils.mjs";
+import { convertToJson, getLocalStorage, setLocalStorage, getDiscount } from "./utils.mjs";
 
+
+const baseURL = import.meta.env.VITE_SERVER_URL
 
 export default class ProductDetails {
-    constructor(productId, dataSource) {
+    constructor(productId) {
         this.productId = productId;
         this.product = {};
-        this.dataSource = dataSource;
     }
 
     async init() {
-        this.product = await this.dataSource.findProductById(this.productId);
-        this.renderProductDetails()
+
+        const response = await fetch(`${baseURL}product/${this.productId}`);
+        const data = await convertToJson(response);
+        this.product = data.Result
+        this.renderProductDetails(data.Result)
         document
             .getElementById("addToCart")
             .addEventListener("click", this.addProductToCart.bind(this));
@@ -44,16 +48,18 @@ export default class ProductDetails {
  * @param {string|number} product.Id - The unique identifier for the product.
  */
 function productDetailsHTML(product) {
+
+    console.log("ProductDetails", product)
     document.querySelector("h3").textContent = product.Brand.Name;
     document.querySelector("h2").textContent = product.NameWithoutBrand;
 
     const productImage = document.getElementById("productImage");
-    productImage.src = product.Image;
+    productImage.src = product.Images.PrimaryLarge;
     productImage.alt = product.NameWithoutBrand
 
     document.getElementById("retail-price").innerHTML = `<span>Retail Price:</span> <span>$${product.SuggestedRetailPrice}</span>`;
     document.getElementById("discount").innerHTML = `<span>You save:</span> <span>${getDiscount(product.SuggestedRetailPrice, product.FinalPrice)}%</span>`;
-    document.getElementById("price").innerHTML =`<span>Now:</span> $${product.FinalPrice}`;
+    document.getElementById("price").innerHTML = `<span>Now:</span> $${product.FinalPrice}`;
     document.getElementById("color").innerHTML = product.Colors[0].ColorName;
     document.getElementById("description").innerHTML = product.DescriptionHtmlSimple;
 

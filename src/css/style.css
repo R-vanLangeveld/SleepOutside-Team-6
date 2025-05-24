@@ -281,6 +281,16 @@ button {
   }
 }
 
+.product-categories{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly
+}
+
+.product-catgory{
+  max-width: 100px;
+}
+
 footer {
   font-size: var(--small-font);
   padding: 1em;
