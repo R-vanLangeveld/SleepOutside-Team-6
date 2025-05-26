@@ -161,6 +161,7 @@ button {
   flex-flow: row wrap;
   list-style-type: none;
   justify-content: center;
+  gap: 1rem;
 }
 
 .product-list a {
@@ -240,6 +241,10 @@ button {
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  padding: 1rem;
 }
 
 .cart-card__image {
@@ -316,6 +321,17 @@ button {
   color: var(--dark-grey);
   text-decoration: none;
   font-weight: 600;
+}
+
+.cart-card__remove-item {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 4px 8px;
+  border-radius: 10px;
+  text-align: center;
 }
 
 @media screen and (min-width: 500px) {
