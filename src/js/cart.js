@@ -1,4 +1,8 @@
-import { getLocalStorage, setLocalStorage, loadHeaderFooter } from "./utils.mjs";
+import {
+  getLocalStorage,
+  setLocalStorage,
+  loadHeaderFooter,
+} from "./utils.mjs";
 
 loadHeaderFooter();
 
@@ -20,7 +24,7 @@ function renderCartContents() {
 
 function getTotal(cartItems) {
   const totalCartValue = cartItems.reduce(
-    (total, item) => total + (item.FinalPrice * item.Qty),
+    (total, item) => total + item.FinalPrice * item.Qty,
     0,
   );
   const cartTotalElement = document.querySelector(".cart-total");
