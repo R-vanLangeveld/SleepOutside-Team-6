@@ -1,10 +1,11 @@
 const baseURL = import.meta.env.VITE_SERVER_URL;
 
 function convertToJson(res) {
+  const jsonbody = res.json()
   if (res.ok) {
-    return res.json();
+    return jsonbody;
   } else {
-    throw new Error("Bad Response");
+    throw { name: "servicesError", message: jsonbody };
   }
 }
 
