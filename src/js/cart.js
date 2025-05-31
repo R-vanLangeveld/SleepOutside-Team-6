@@ -76,5 +76,4 @@ function removeProductFromCart() {
 }
 
 renderCartContents();
-document.querySelector("svg").classList.remove("new-in-cart");
 removeProductFromCart();
