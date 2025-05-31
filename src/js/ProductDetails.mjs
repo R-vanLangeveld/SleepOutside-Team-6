@@ -41,6 +41,7 @@ export default class ProductDetails {
 			cartItems.push(Object.assign(this.product, array));
 		}
 		setLocalStorage("so-cart", cartItems);
+		document.querySelector("svg").classList.add("new-in-cart");
 	}
 
 	renderProductDetails() {

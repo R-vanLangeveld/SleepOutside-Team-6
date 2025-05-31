@@ -279,6 +279,16 @@ fieldset {
 }
 
 /* Start cart list card styles */
+.new-in-cart {
+  animation: new-in-cart 2s infinite;
+}
+
+@keyframes new-in-cart {
+  0% {rotate: -30deg;}
+  50% {rotate: 30deg;}
+  100% {rotate: -30deg;}
+}
+
 .cart-card {
   display: grid;
   grid-template-columns: 25% auto 15%;
