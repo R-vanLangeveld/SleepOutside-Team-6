@@ -192,6 +192,32 @@ button {
   margin: 1rem auto;
 }
 
+/* checkout styles */
+.checkout-form {
+  padding: 0.5em;
+}
+
+fieldset {
+  border: #767676 solid thin;
+  border-radius: 1rem;
+  padding: 6px 1rem 1rem;
+  margin: 0.5rem 0 1rem;
+}
+
+.checkout-summary {
+  margin-bottom: 0.5rem;
+}
+
+.checkout-form label {
+  display: block;
+  margin-top: 10px;
+}
+
+.checkout-form input {
+  width: 100%;
+  font-size: 1.2em;
+}
+
 /* Styles for product lists */
 .product-card {
   flex: 1 1 45%;

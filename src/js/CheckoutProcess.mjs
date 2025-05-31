@@ -1,25 +1,49 @@
+import { setLocalStorage,
+  getLocalStorage } from "./utils.mjs";
 import ExternalServices from "./ExternalServices.mjs";
 const services = new ExternalServices();
 
 export default class CheckoutProcess {
-	constructor() {}
+	constructor() {
+    this.list = getLocalStorage("so-cart");
+    this.itemTotal = 0;
+    this.shipping = 0;
+    this.tax = 0;
+    this.orderTotal = 0;
+  }
 
-	getTotal(cartItems) {
-		const shipping = cartItems.reduce(
-			(total, item) => total + (item.Qty * 2), 8,
-		);
-		const totalItems = cartItems.reduce(
-			(total, item) => total + item.Qty, 0,
-		);
-		const totalCartValue = cartItems.reduce(
-			(total, item) => total + (item.FinalPrice * item.Qty), 0,
-		);
-		const cartTotalElement = document.querySelector(".summary");
-		const total = shipping + (totalCartValue * 1.06);
+  init() {
+    this.calculateItemSummary();
+  }
 
-		cartTotalElement.innerHTML = `<h3>Order Summary</h3>
-		<p>Total Items:${totalItems}<br>Subtotal: $${totalCartValue}<br>Tax: $${(totalCartValue * 0.06).toFixed(2)}<br>Shipping Estimate: $${shipping}<br>Order Total: $${total.toFixed(2)}</p>`;
-	}
+  calculateItemSummary() {
+    const totalCartItems = this.list.reduce(
+      (total, item) => total + item.Qty, 0,
+    );
+    this.itemTotal = this.list.reduce(
+      (total, item) => total + (item.FinalPrice * item.Qty), 0,
+    );
+    document.querySelector("#cartTotal").innerHTML = `Item Subtotal(${totalCartItems}): $${this.itemTotal}`;
+  }
+
+  calculateOrdertotal() {
+    this.shipping = 10 + (this.list.length - 1) * 2;
+    this.tax = (this.itemTotal * 0.06).toFixed(2);
+    this.orderTotal = (
+      parseFloat(this.itemTotal) +
+      parseFloat(this.shipping) +
+      parseFloat(this.tax)).toFixed(2);
+    this.displayOrderTotals();
+  }
+
+  displayOrderTotals() {
+    const shipping = document.querySelector("#shipping");
+    const tax = document.querySelector("#tax");
+    const orderTotal = document.querySelector("#orderTotal");
+    shipping.innerText = `Shipping Estimate: $${this.shipping}`;
+    tax.innerText = `Tax: $${this.tax}`;
+    orderTotal.innerHTML = `<b>Order Total:</b> $${this.orderTotal}`;
+  }
 	
   async checkout() {
     const formElement = document.forms["checkout"];
@@ -31,9 +55,12 @@ export default class CheckoutProcess {
     order.shipping = this.shipping;
     order.items = packageItems(this.list);
 
+    console.log(json);
     try {
       const response = await services.checkout(order);
       console.log(response);
+      setLocalStorage("so-cart", []);
+      location.assign("/checkout/success.html");
     } catch (err) {
       console.log(err);
     }
