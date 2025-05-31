@@ -12,3 +12,13 @@ myList.init();
 
 document.querySelector(".title").textContent =
   `Top Products: ${category.charAt(0).toUpperCase() + category.slice(1)}`;
+
+const sortName = document.querySelector("#sort-name");
+sortName.addEventListener("click", () => {
+  myList.sort("name");
+});
+
+const sortPrice = document.querySelector("#sort-price");
+sortPrice.addEventListener("click", () => {
+  myList.sort("price");
+});
