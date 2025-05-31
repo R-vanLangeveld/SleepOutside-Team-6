@@ -111,6 +111,23 @@ button {
   cursor: pointer;
 }
 
+.sort-products {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.sort-button {
+  padding: 0.1em 0.5em;
+  background-color: var(--secondary-color);
+  color: white;
+  margin: 0px 0.5em;
+  border: 0;
+  border-radius: 1rem;
+  font-size: var(--large-font);
+  cursor: pointer;
+}
+
 .divider {
   border-bottom: 2px solid var(--primary-color);
 }

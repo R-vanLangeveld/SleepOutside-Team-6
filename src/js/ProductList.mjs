@@ -23,14 +23,41 @@ export default class ProductList {
     this.category = category;
     this.dataSource = dataSource;
     this.listElement = listElement;
+    this.order = "asc";
+
   }
 
   async init() {
-    const list = await this.dataSource.getData(this.category);
-    this.renderList(list);
+    this.list = await this.dataSource.getData(this.category);
+    this.renderList(this.list);
   }
 
   renderList(list) {
     renderListWithTemplate(productCardTemplate, this.listElement, list);
+  }
+
+  sort(sort) {
+    if (sort === "name") {
+      if (this.order === "asc") {
+        this.list.sort((a, b) => a.Name.localeCompare(b.Name));
+        this.order = "desc"
+      }
+      else {
+        this.list.sort((a, b) => b.Name.localeCompare(a.Name));
+        this.order = "asc"
+      }
+    }
+    if (sort === "price") {
+      if (this.order === "asc") {
+        this.list.sort((a, b) => a.FinalPrice - b.FinalPrice);
+        this.order = "desc"
+      }
+      else {
+        this.list.sort((a, b) => b.FinalPrice - a.FinalPrice);
+        this.order = "asc"
+      }
+
+    }
+    this.renderList(this.list);
   }
 }
