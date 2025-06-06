@@ -28,7 +28,13 @@ export function getParam(param) {
   return product;
 }
 
-export function renderListWithTemplate(template, parentElement, list, position = "afterbegin", clear = false) {
+export function renderListWithTemplate(
+  template,
+  parentElement,
+  list,
+  position = "afterbegin",
+  clear = false,
+) {
   const htmlStrings = list.map(template);
   if (clear) {
     parentElement.innerHTML = "";
@@ -61,5 +67,17 @@ export async function loadHeaderFooter() {
 }
 
 export function getDiscount(suggestedRetailPrice, finalPrice) {
-  return Math.round(((suggestedRetailPrice - finalPrice) / suggestedRetailPrice) * 100);
+  return Math.round(
+    ((suggestedRetailPrice - finalPrice) / suggestedRetailPrice) * 100,
+  );
+}
+
+export function updateCartCount() {
+  const cartItems = getLocalStorage("so-cart") || [];
+  const totalQty = cartItems.reduce((sum, item) => sum + item.Qty, 0);
+  const cartCountElement = document.querySelector(".card-count"); 
+
+  if (cartCountElement) {
+    cartCountElement.textContent = totalQty;
+  }
 }

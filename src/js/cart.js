@@ -2,9 +2,12 @@ import {
   getLocalStorage,
   setLocalStorage,
   loadHeaderFooter,
+  updateCartCount
 } from "./utils.mjs";
 
-loadHeaderFooter();
+loadHeaderFooter().then(() => {
+  updateCartCount();
+});
 
 function renderCartContents() {
   const cartItems = getLocalStorage("so-cart") || [];
@@ -70,6 +73,7 @@ function removeProductFromCart() {
         cartUpdated.splice(indexElement, 1);
         setLocalStorage("so-cart", cartUpdated);
         renderCartContents();
+        updateCartCount();
       }
     }
   });
